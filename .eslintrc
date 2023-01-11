@@ -3,6 +3,10 @@
   "extends": [
     "plugin:@typescript-eslint/recommended"
   ],
+  "env": {
+    "node": true,
+    "commonjs": true
+  },
   "parserOptions": {
     "parser": {
       "ts": "@typescript-eslint/parser",
@@ -535,7 +539,6 @@
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/prefer-readonly": "error",
     "@typescript-eslint/prefer-reduce-type-parameter": "error",
-    "@typescript-eslint/prefer-ts-expect-error": "error",
     "@typescript-eslint/promise-function-async": [
       "error",
       {
@@ -564,18 +567,6 @@
       "error",
       "never"
     ],
-    "@typescript-eslint/strict-boolean-expressions": [
-      "error",
-      {
-        "allowString": false,
-        "allowNumber": false,
-        "allowNullableObject": false,
-        "allowNullableBoolean": false,
-        "allowNullableString": false,
-        "allowNullableNumber": false,
-        "allowAny": false
-      }
-    ],
     "@typescript-eslint/triple-slash-reference": [
       "error",
       {
@@ -597,6 +588,7 @@
       "always-multiline"
     ],
     "brace-style": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/brace-style": [
       "error",
       "stroustrup",
