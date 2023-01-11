@@ -5,7 +5,7 @@ import bodyParser from "body-parser"
 import session from "express-session"
 
 import passport from "passport"
-import { jwt } from "./services/passport.service"
+import { JWT } from "./services/passport.service"
 import router from "./routes"
 
 dotenv.config()
@@ -32,7 +32,7 @@ app.use(session({
 }))
 app.use(passport.session())
 app.use(passport.initialize())
-passport.use("jwt", jwt)
+passport.use("jwt", JWT)
 
 async function main (): Promise<void> {
   try {

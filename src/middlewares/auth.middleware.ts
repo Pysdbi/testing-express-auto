@@ -1,26 +1,21 @@
 import passport from "passport"
-import bluebird from "bluebird"
+import dotenv from "dotenv"
+import jsonwebtoken from "jsonwebtoken"
 
 import { UserModel, UserRole } from "../models/user.model"
 
-const handleJWT = (req, res, next, roles) => async (err, user, info) => {
-  const error = err || info
-  const logIn = bluebird.promisify(req.logIn)
+dotenv.config()
 
+const handleJWT = (req, res, next) => async () => {
   try {
-    if (error || !user) return res.sendStatus(403)
-    await logIn(user, { session: false })
+    // TODO Validate role
+    const verify = jsonwebtoken.verify(req.headers.authorization.slice(7), process.env.JWT_SECRET)
+    if (!verify) return res.sendStatus(403)
+    return next()
   }
-  catch (e) {
-    return next(res.sendStatus(403))
+  catch (ex) {
+    return res.sendStatus(403)
   }
-
-  if (!roles.includes(user.role)) {
-    return next(res.sendStatus(403))
-  }
-  // eslint-disable-next-line require-atomic-updates
-  req.user = user
-  return next()
 }
 
 // @ts-ignore

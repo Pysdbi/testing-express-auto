@@ -9,7 +9,7 @@ export const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 }
 
-export const jwt = new Strategy(jwtOptions, async (jwtPayload, done) => {
+export const JWT = new Strategy(jwtOptions, async (jwtPayload, done) => {
   void UserModel.findById(jwtPayload.sub, (err, user) => {
     // @ts-ignore
     if (err) return done(err, null)
