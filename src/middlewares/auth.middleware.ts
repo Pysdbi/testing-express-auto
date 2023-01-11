@@ -6,7 +6,7 @@ import { UserModel, UserRole } from "../models/user.model"
 
 dotenv.config()
 
-const handleJWT = (req, res, next) => async () => {
+const handleJWT = (req, res, next, roles) => async () => {
   try {
     // TODO Validate role
     const verify = jsonwebtoken.verify(req.headers.authorization.slice(7), process.env.JWT_SECRET)
