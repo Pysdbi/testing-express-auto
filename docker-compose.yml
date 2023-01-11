@@ -1,14 +1,8 @@
 version: "3.8"
 services:
   mongodb:
-    image: mongo:2.4
-    command: --smallfiles
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: db
     ports:
-      - "27017:27017"
-    volumes:
-      - type: volume
-        source: mongodb_data_volume
-        target: /data/db
-volumes:
-  mongodb_data_volume:
-    external: true
+      - "3001:27017"
