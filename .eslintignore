@@ -6,3 +6,5 @@ dist/*
 # 3rd party libs
 # custom definition files
 /src/types/
+/test
+/jest.config.js

@@ -10,7 +10,7 @@ import router from "./routes"
 
 dotenv.config()
 
-const app: Express = express()
+export const app: Express = express()
 const port = process.env.PORT
 
 import("./models/car.model")
@@ -34,7 +34,7 @@ app.use(passport.session())
 app.use(passport.initialize())
 passport.use("jwt", JWT)
 
-async function main (): Promise<void> {
+export async function main (): Promise<void> {
   try {
     mongoose.set("strictQuery", true)
     await connect(process.env.DB_STRING, {})
