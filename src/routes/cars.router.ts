@@ -32,7 +32,7 @@ router
    * @apiParam {Number}  yearProduction   Year of production car
    * @apiParam {Number}  price            Car price
    */
-  .post(createCar)
+  .post(authorize(), createCar)
 
 router
   .route("/:id")
@@ -42,7 +42,7 @@ router
    * @apiName Get Car by id
    * @apiGroup Cars
    */
-  .get(getCarById)
+  .get(authorize(), getCarById)
 
   /**
    * @api {get} api/cars/:id
@@ -52,7 +52,7 @@ router
    *
    * @apiParam {String}  id   Car id
    */
-  .delete(deleteCarById)
+  .delete(authorize(), deleteCarById)
 
   /**
    * @api {get} api/cars/:id
@@ -65,6 +65,6 @@ router
    * @apiParam {Number}  yearProduction   Year of production car
    * @apiParam {Number}  price            Car price
    */
-  .put(updateCarById)
+  .put(authorize(), updateCarById)
 
 export default router

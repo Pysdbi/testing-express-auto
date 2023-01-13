@@ -10,4 +10,8 @@ router.use("/auth", authRouter)
 router.use("/cars", carsRoutes)
 router.use("/brands", brandsRouter)
 
+router.get("/",
+  (req, res) => res.json({ msg: "Testing-express-auto" }),
+)
+
 export default router

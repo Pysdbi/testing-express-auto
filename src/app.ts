@@ -10,7 +10,7 @@ import router from "./routes"
 
 dotenv.config()
 
-export const app: Express = express()
+const app: Express = express()
 const port = process.env.PORT
 
 import("./models/car.model")
@@ -34,11 +34,19 @@ app.use(passport.session())
 app.use(passport.initialize())
 passport.use("jwt", JWT)
 
-export async function main (): Promise<void> {
+// Hook on Exit
+process.on("SIGINT", async () => {
+  await disconnect()
+  // eslint-disable-next-line no-console
+  console.info("[server]: Server is stopped.")
+  process.exit()
+})
+
+export async function main (App): Promise<void> {
   try {
     mongoose.set("strictQuery", true)
     await connect(process.env.DB_STRING, {})
-    app.listen(port, () => {
+    App.listen(port, () => {
       // eslint-disable-next-line no-console
       console.info(`[server]: Server is running at http://localhost:${port}`)
     })
@@ -49,12 +57,4 @@ export async function main (): Promise<void> {
   }
 }
 
-void main()
-
-// Hook on Exit
-process.on("SIGINT", async () => {
-  await disconnect()
-  // eslint-disable-next-line no-console
-  console.info("[server]: Server is stopped.")
-  process.exit()
-})
+export default app

@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { createBrand, deleteBrandById, getBrandById, getBrandsList } from "../controllers/brand.controller"
+import { authorize } from "../middlewares/auth.middleware"
 
 const router = Router()
 
@@ -13,7 +14,7 @@ router
    *
    * @apiQueryParam {String}  sort   Sorting list [asc | desc]
    */
-  .get(getBrandsList)
+  .get(authorize(), getBrandsList)
 
   /**
    * @api {post} api/brands
@@ -23,7 +24,7 @@ router
    *
    * @apiParam {String}  name   Brand name
    */
-  .post(createBrand)
+  .post(authorize(), createBrand)
 
 router
   .route("/:id")
@@ -35,7 +36,7 @@ router
    *
    * @apiParam {String}  id   Brand id
    */
-  .get(getBrandById)
+  .get(authorize(), getBrandById)
 
   /**
    * @api {delete} api/brands/:id
@@ -45,6 +46,6 @@ router
    *
    * @apiParam {String}  id   Brand id
    */
-  .delete(deleteBrandById)
+  .delete(authorize(), deleteBrandById)
 
 export default router
